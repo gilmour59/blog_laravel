@@ -98,6 +98,6 @@ class CategoryController extends Controller
 
         session()->flash('success', 'Category successfully Deleted!');
 
-        return redirect('categories.index');
+        return redirect(route('categories.index'));
     }
 }
