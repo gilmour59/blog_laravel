@@ -21,9 +21,7 @@
                                 {{ $category->name }}
                             </td>
                             <td>
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">Edit</a>
-                            </td>
-                            <td>
+                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
                                 <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $category->id }})">Delete</button>
                             </td>
                         </tr>
@@ -43,7 +41,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                ...
+                                Are you sure you want to Delete this Category?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back!</button>
