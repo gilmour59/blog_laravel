@@ -41,7 +41,9 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Are you sure you want to Delete this Category?
+                                <p class="font-weight-bold">
+                                    Are you sure you want to Delete this Category?
+                                </p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back!</button>
