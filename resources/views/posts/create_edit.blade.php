@@ -19,7 +19,7 @@
                     @endforeach
                 </div>
             @endif
-            <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
+            <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title:</label>
@@ -27,11 +27,15 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <input type="text" name="description" id="desciption" class="form-control" value="{{ isset($post) ? $post->description : ""}}">
+                    <textarea name="description" id="description" cols="5" rows="5" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="content">Content:</label>
-                    <input type="text" name="content" id="content" class="form-control" value="{{ isset($post) ? $post->content : ""}}">
+                    <textarea name="content" id="content" cols="5" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="published_at">Published At:</label>
+                    <input type="text" name="published_at" id="published_at" class="form-control" value="{{ isset($post) ? $post->published_at : ""}}">
                 </div>
                 <div class="form-group">
                     <label for="image">Image:</label>
