@@ -73,8 +73,8 @@
         </nav>
 
         <main class="py-4">
-            @auth
-                <div class="container">
+            <div class="container">
+                @auth                
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -95,10 +95,10 @@
                             @yield('content')
                         </div>
                     </div>
-                </div>
-            @else
-                @yield('content')
-            @endauth
+                @else
+                    @yield('content')
+                @endauth
+            </div>
         </main>
     </div>
     @yield('scripts');
