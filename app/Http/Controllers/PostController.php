@@ -37,13 +37,18 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        Post::create([
+        $image = $request->image->store('posts/img');
+
+        $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'published_at' => $request->published_at,
-            'image' => $request->image,
+            'image' => $image,
         ]);
+        
+        if($post->id === NULL){
+            //insert delete file here!
+        }
 
         session()->flash('success, Post successfully Added!');
 
@@ -81,7 +86,16 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'content' => $request->content,
+            'image' => $request->image,         
+        ]);
+
+        session()->flash('success', 'Post Updated!');
+
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -92,6 +106,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        session()->flash('success', 'Post successfully Deleted!');
+        
+        return redirect(route('posts.index'));
     }
 }
