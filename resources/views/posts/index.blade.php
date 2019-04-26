@@ -13,24 +13,16 @@
                 <thead>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Content</th>
-                    <th>Image</th>
                     <th></th>
                 </thead>
                 <tbody>
                     @foreach ($posts as $post)
                         <tr>
+                            <td>                               
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="">
+                            </td>
                             <td>
                                 {{ $post->title }}
-                            </td>
-                            <td>
-                                {{ $post->description }}
-                            </td>
-                            <td>
-                                {{ $post->content }}
-                            </td>
-                            <td>
-                                <img src="{{ $post->image }}" alt="{{ $post->title }}">
                             </td>
                             <td>
                                 <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
