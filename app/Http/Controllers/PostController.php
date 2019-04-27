@@ -45,7 +45,7 @@ class PostController extends Controller
             'content' => $request->content,
             'image' => $image,
         ]);
-        
+
         if($post->id === NULL){
             //insert delete file here!
         }
@@ -90,7 +90,7 @@ class PostController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'image' => $request->image,         
+            'image' => $request->image,
         ]);
 
         session()->flash('success', 'Post Updated!');
@@ -108,8 +108,8 @@ class PostController extends Controller
     {
         $post->delete();
 
-        session()->flash('success', 'Post successfully Deleted!');
-        
+        session()->flash('success', 'Post successfully Trashed!');
+
         return redirect(route('posts.index'));
     }
 }

@@ -46,12 +46,12 @@
                             </div>
                             <div class="modal-body">
                                 <p class="font-weight-bold">
-                                    Are you sure you want to Delete this Post?
+                                    Are you sure you want to Trash this Post?
                                 </p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back!</button>
-                                <button type="submit" class="btn btn-danger">Delete!</button>
+                                <button type="submit" class="btn btn-danger">Trash!</button>
                             </div>
                         </div>
                     </div>
