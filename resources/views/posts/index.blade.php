@@ -10,7 +10,7 @@
 
     <div class="card card-default">
         <div class="card-header">
-            Posts
+            {{ isset($trash) ? 'Trashed Posts' : 'Posts' }}
         </div>
         <div class="card-body">
             @if ($posts->count() > 0)
