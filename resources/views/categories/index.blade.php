@@ -9,25 +9,29 @@
             Categories
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <th>Name</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    @foreach ($categories as $category)
-                        <tr>
-                            <td>
-                                {{ $category->name }}
-                            </td>
-                            <td>
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
-                                <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $category->id }})">Delete</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if ($categories->count() > 0)
+                <table class="table table-hover">
+                    <thead>
+                        <th>Name</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td>
+                                    {{ $category->name }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
+                                    <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $category->id }})">Delete</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <h5 class="text-center">No Categories Yet!</h5>
+            @endif
             <form action="" method="POST" id="deleteCategoryForm">
                 @csrf
                 @method('DELETE')

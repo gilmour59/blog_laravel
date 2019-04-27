@@ -74,7 +74,7 @@
 
         <main class="py-4">
             <div class="container">
-                @auth                
+                @auth
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -88,6 +88,12 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a href="{{ route('categories.index') }}">Categories</a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-group mt-5">
+                                <li class="list-group-item">
+                                    <a href="{{ route('posts.trash') }}">Trashed Posts</a>
                                 </li>
                             </ul>
                         </div>

@@ -1,37 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-end mb-2">
-        <a href="{{ route('posts.create') }}" class="btn btn-success">Add</a>
-    </div>
+
+    @if(!isset($trash))
+        <div class="d-flex justify-content-end mb-2">
+            <a href="{{ route('posts.create') }}" class="btn btn-success">Add</a>
+        </div>
+    @endif
+
     <div class="card card-default">
         <div class="card-header">
             Posts
         </div>
         <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    @foreach ($posts as $post)
-                        <tr>
-                            <td>
-                                <img src="{{ asset('storage/' . $post->image) }}" alt=" {{ $post->title }}" width="40" height="40">
-                            </td>
-                            <td>
-                                {{ $post->title }}
-                            </td>
-                            <td>
-                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
-                                <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $post->id }})">Trash</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if ($posts->count() > 0)
+                <table class="table table-hover">
+                    <thead>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        @foreach ($posts as $post)
+                            <tr>
+                                <td>
+                                    <img src="{{ asset('storage/' . $post->image) }}" alt=" {{ $post->title }}" width="40" height="40">
+                                </td>
+                                <td>
+                                    {{ $post->title }}
+                                </td>
+                                <td>
+                                    @if (!$post->trashed())
+                                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
+                                    @endif
+                                    <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $post->id }}, {{ $post->trashed() }})">
+                                        {{ $post->trashed() ? 'Delete' : 'Trash'}}
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @elseif(isset($trash))
+                <h5 class="text-center">Empty!</h5>
+            @else
+                <h5 class="text-center">No Posts Yet!</h5>
+            @endif
             <form action="" method="POST" id="deletePostForm">
                 @csrf
                 @method('DELETE')
@@ -39,19 +53,17 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Delete Post</h5>
+                                <h5 class="modal-title" id="deleteModalLabel"></h5>
                                 <button type="button" class="close" data-dismiss="modal">
                                     <span>&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p class="font-weight-bold">
-                                    Are you sure you want to Trash this Post?
-                                </p>
+                                <p class="font-weight-bold" id="deleteP"></p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back!</button>
-                                <button type="submit" class="btn btn-danger">Trash!</button>
+                                <button type="submit" class="btn btn-danger" id="deleteButton"></button>
                             </div>
                         </div>
                     </div>
@@ -63,11 +75,21 @@
 
 @section('scripts')
     <script>
-        function handleDelete(id) {
+        function handleDelete(id, trash) {
             $('#deleteModal').modal('show');
             var form = document.getElementById('deletePostForm');
             form.action = "posts/" + id;
-            console.log(id, form);
+            console.log(trash, id, form);
+
+            if(trash == true){
+                $('#deleteModalLabel').html('Delete Post');
+                $('#deleteP').html('Are you sure you want to Delete this Post?');
+                $('#deleteButton').html('Delete');
+            }else{
+                $('#deleteModalLabel').html('Trash Post');
+                $('#deleteP').html('Are you sure you want to Trash this Post?');
+                $('#deleteButton').html('Trash');
+            }
         }
     </script>
 @endsection
