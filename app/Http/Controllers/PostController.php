@@ -45,6 +45,7 @@ class PostController extends Controller
             'description' => $request->description,
             'content' => $request->content,
             'image' => $image,
+            'published_at' => $request->published_at
         ]);
 
         if($post->id === NULL){
@@ -125,8 +126,7 @@ class PostController extends Controller
     {
         $trashed = Post::onlyTrashed()->get();
 
-        return view('posts.index')->withPosts($trashed)->with('trash', true);
-
         //the same with (view('posts.trash')->with('post', $trashed))
+        return view('posts.index')->withPosts($trashed)->with('trash', true);
     }
 }
