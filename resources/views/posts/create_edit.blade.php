@@ -27,17 +27,22 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea name="description" id="description" cols="5" rows="5" class="form-control"></textarea>
+                    <textarea name="description" id="description" cols="5" rows="5" class="form-control">{{ isset($post) ? $post->description : ""}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="content">Content:</label>
-                    <input id="content" type="hidden" name="content">
+                    <input id="content" type="hidden" name="content" value="{{ isset($post) ? $post->content : ""}}">
                     <trix-editor input="content"></trix-editor>
                 </div>
                 <div class="form-group">
                     <label for="published_at">Published At:</label>
                     <input type="text" name="published_at" id="published_at" class="form-control" value="{{ isset($post) ? $post->published_at : ""}}">
                 </div>
+                @isset($post)
+                    <div class="form-group">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" style="width:100px;height:auto;">
+                    </div>
+                @endisset
                 <div class="form-group">
                     <label for="image">Image:</label>
                     <input type="file" name="image" id="image" class="form-control">
