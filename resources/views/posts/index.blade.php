@@ -83,11 +83,11 @@
 
             if(trash == true){
                 $('#deleteModalLabel').html('Delete Post');
-                $('#deleteP').html('Are you sure you want to Delete this Post?');
+                $('#deleteP').html('Are you sure you want to delete this Post?');
                 $('#deleteButton').html('Delete');
             }else{
                 $('#deleteModalLabel').html('Trash Post');
-                $('#deleteP').html('Are you sure you want to Trash this Post?');
+                $('#deleteP').html('Are you sure you want to trash this Post?');
                 $('#deleteButton').html('Trash');
             }
         }

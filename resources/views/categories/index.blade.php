@@ -46,7 +46,7 @@
                             </div>
                             <div class="modal-body">
                                 <p class="font-weight-bold">
-                                    Are you sure you want to Delete this Category?
+                                    Are you sure you want to delete this Category?
                                 </p>
                             </div>
                             <div class="modal-footer">
