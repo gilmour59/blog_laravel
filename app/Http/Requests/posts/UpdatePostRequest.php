@@ -24,9 +24,10 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts',
-            'image' => 'required|image',
-            'content' => 'required'
+            'title' => 'required|unique:posts,title,' . $this->post->id,
+            'image' => 'image',
+            'content' => 'required',
+            'published_at' => 'required'
         ];
     }
 }

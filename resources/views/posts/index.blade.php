@@ -16,8 +16,8 @@
             @if ($posts->count() > 0)
                 <table class="table table-hover">
                     <thead>
+                        <th>Image</th>
                         <th>Title</th>
-                        <th>Description</th>
                         <th></th>
                     </thead>
                     <tbody>
