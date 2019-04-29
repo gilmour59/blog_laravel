@@ -48,6 +48,16 @@
                     <input type="file" name="image" id="image" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select name="category" id="category" class="form-control">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" {{ isset($post) ? ($category->id === $post->category_id ? "selected" : "") : "" }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach  
+                    </select>
+                </div>
+                <div class="form-group">
                     <input type="submit" value="Enter" class="btn btn-primary float-right">
                 </div>
                     @isset($post)

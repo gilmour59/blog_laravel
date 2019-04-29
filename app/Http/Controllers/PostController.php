@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 
@@ -26,7 +27,15 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create_edit');
+        $categories = Category::all();
+        
+        if($categories->count() > 0){
+            return view('posts.create_edit')->with('categories', $categories);
+        }else{
+            session()->flash('error', 'Create a Category First!');
+            
+            return redirect()->back();
+        }
     }
 
     /**
@@ -44,12 +53,9 @@ class PostController extends Controller
             'description' => $request->description,
             'content' => $request->content,
             'image' => $image,
-            'published_at' => $request->published_at
+            'published_at' => $request->published_at,
+            'category_id' => $request->category
         ]);
-
-        if($post->id === NULL){
-            //insert delete file here!
-        }
 
         session()->flash('success, Post successfully Added!');
 
@@ -75,7 +81,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create_edit')->with('post', $post);
+        return view('posts.create_edit')->with('post', $post)->with('categories', Category::all());
     }
 
     /**
@@ -95,6 +101,8 @@ class PostController extends Controller
 
             $data['image'] = $image;
         }
+
+        $data['category_id'] = $request->category;
 
         $post->update($data);
 

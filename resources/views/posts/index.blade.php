@@ -18,6 +18,7 @@
                     <thead>
                         <th>Image</th>
                         <th>Title</th>
+                        <th>Category</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -28,6 +29,9 @@
                                 </td>
                                 <td>
                                     {{ $post->title }}
+                                </td>
+                                <td>
+                                    {{ $post->category->name }}
                                 </td>
                                 <td>
                                     @if ($post->trashed())

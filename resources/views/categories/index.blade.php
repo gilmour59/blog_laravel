@@ -13,13 +13,16 @@
                 <table class="table table-hover">
                     <thead>
                         <th>Name</th>
-                        <th></th>
+                        <th>Post Count</th>
                     </thead>
                     <tbody>
                         @foreach ($categories as $category)
                             <tr>
                                 <td>
                                     {{ $category->name }}
+                                </td>
+                                <td>
+                                    {{ $category->posts->count() }}
                                 </td>
                                 <td>
                                     <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm mr-3">Edit</a>
