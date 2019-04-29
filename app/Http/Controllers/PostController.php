@@ -116,11 +116,15 @@ class PostController extends Controller
         if($post->trashed()){
             $post->deleteImage();
             $post->forceDelete();
+
             session()->flash('success', 'Post successfully Deleted!');
+
             return redirect(route('posts.trash'));
         }else{
             $post->delete();
+
             session()->flash('success', 'Post successfully Trashed!');
+
             return redirect(route('posts.index'));
         }
     }
@@ -131,5 +135,15 @@ class PostController extends Controller
 
         //the same with (view('posts.trash')->with('post', $trashed))
         return view('posts.index')->withPosts($trashed)->with('trash', true);
+    }
+
+    public function restore($id)
+    {
+        $post = Post::onlyTrashed()->where('id', $id)->firstOrFail();
+        $post->restore();
+
+        session()->flash('success', 'Post successfully Restored!');
+
+        return redirect()->back();
     }
 }
