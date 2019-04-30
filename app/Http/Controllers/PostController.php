@@ -10,6 +10,11 @@ use App\Http\Requests\Posts\UpdatePostRequest;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verifyCategoriesCount')->only(['create', 'store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,15 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        
-        if($categories->count() > 0){
-            return view('posts.create_edit')->with('categories', $categories);
-        }else{
-            session()->flash('error', 'Create a Category First!');
-            
-            return redirect()->back();
-        }
+        return view('posts.create_edit')->with('categories', Category::all());
     }
 
     /**
