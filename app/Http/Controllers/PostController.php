@@ -54,7 +54,7 @@ class PostController extends Controller
             'category_id' => $request->category
         ]);
 
-        session()->flash('success, Post successfully Added!');
+        session()->flash('success', 'Post successfully Added!');
 
         return redirect(route('posts.index'));
     }
