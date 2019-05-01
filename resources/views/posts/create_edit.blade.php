@@ -10,15 +10,7 @@
             @endisset
         </div>
         <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li class="list-group text-danger">
-                            {{ $error }}
-                        </li>
-                    @endforeach
-                </div>
-            @endif
+            @include('includes.validation_errors')
             <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -54,7 +46,7 @@
                             <option value="{{ $category->id }}" {{ isset($post) ? ($category->id === $post->category_id ? "selected" : "") : "" }}>
                                 {{ $category->name }}
                             </option>
-                        @endforeach  
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
