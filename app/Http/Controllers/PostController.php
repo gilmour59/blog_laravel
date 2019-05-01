@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Tag;
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 
@@ -32,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create_edit')->with('categories', Category::all());
+        return view('posts.create_edit')->with('categories', Category::all())->with('tags', Tag::all());
     }
 
     /**
@@ -78,7 +79,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create_edit')->with('post', $post)->with('categories', Category::all());
+        return view('posts.create_edit')->with('post', $post)->with('categories', Category::all())->with('tags', Tag::all());
     }
 
     /**

@@ -49,6 +49,18 @@
                         @endforeach
                     </select>
                 </div>
+                @if ($tags->count() > 0)
+                    <div class="form-group">
+                        <label for="tags">Select Tags:</label>
+                        <select name="tags[]" id="tags" class="form-control" multiple>
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}">
+                                    {{ $tag->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="form-group">
                     <input type="submit" value="Enter" class="btn btn-primary float-right">
                 </div>
