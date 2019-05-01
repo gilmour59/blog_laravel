@@ -55,6 +55,10 @@ class PostController extends Controller
             'category_id' => $request->category
         ]);
 
+        if ($request->tags) {
+            $post->tags()->attach($request->tags);
+        }
+
         session()->flash('success', 'Post successfully Added!');
 
         return redirect(route('posts.index'));
