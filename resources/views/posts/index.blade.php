@@ -88,7 +88,12 @@
         function handleDelete(id, trash) {
             $('#deleteModal').modal('show');
             var form = document.getElementById('deletePostForm');
-            form.action = "posts/" + id;
+
+            if(trash){
+                form.action = "trashed-posts/" + id;
+            }else{
+                form.action = "posts/" + id;
+            }  
             console.log(trash, id, form);
 
             if(trash == true){

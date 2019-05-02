@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tags', 'TagController');
 
     Route::resource('posts', 'PostController');
-    Route::get('trashed-posts', 'PostController@trashed')->name('posts.trash');
     Route::put('restore-posts/{post}', 'PostController@restore')->name('posts.restore');
+    Route::get('trashed-posts', 'PostController@trashed')->name('posts.trash');
+    Route::delete('trashed-posts/{post}', 'PostController@destroyTrash')->name('posts.destroy-trash');
 });
