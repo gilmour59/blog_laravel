@@ -43,7 +43,7 @@
                     <label for="category">Category:</label>
                     <select name="category" id="category" class="form-control">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ isset($post) ? ($category->id === $post->category_id ? "selected" : "") : "" }}>
+                            <option value="{{ $category->id }}" {{ (old('category') == $category->id) ? "selected" : (isset($post) ? ($category->id === $post->category_id ? "selected" : "") : "") }}>
                                 {{ $category->name }}
                             </option>
                         @endforeach
@@ -54,7 +54,19 @@
                         <label for="tags">Select Tags:</label>
                         <select name="tags[]" id="tags" class="form-control" multiple>
                             @foreach ($tags as $tag)
-                                <option value="{{ $tag->id }}">
+                                <option value="{{ $tag->id }}"
+                                    @if (old('tags') !== NULL)
+                                        @if (in_array($tag->id, old('tags')))
+                                            selected
+                                        @endif                 
+                                    @else
+                                        @isset($post)
+                                            @if (in_array($tag->id, $post->tags->pluck('id')->toArray()))
+                                                selected
+                                            @endif  
+                                        @endisset
+                                    @endif                                
+                                >
                                     {{ $tag->name }}
                                 </option>
                             @endforeach
