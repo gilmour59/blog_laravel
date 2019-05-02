@@ -30,3 +30,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('trashed-posts', 'PostController@trashed')->name('posts.trash');
     Route::delete('trashed-posts/{post}', 'PostController@destroyTrash')->name('posts.destroy-trash');
 });
+
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('users', 'UserController@index')->name('users.index');
+
+});
+
