@@ -22,8 +22,6 @@ class CreatePostsTable extends Migration
             $table->smallInteger('category_id');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
