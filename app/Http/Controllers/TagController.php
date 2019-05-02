@@ -94,6 +94,12 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        if ($tag->posts->count() > 0) {
+            session()->flash('error', 'This tag still has posts in it!');
+
+            return redirect()->back();
+        }
+
         $tag->delete();
 
         session()->flash('success', 'Tag successfully Deleted!');
