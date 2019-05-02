@@ -106,6 +106,10 @@ class PostController extends Controller
 
         $data['category_id'] = $request->category;
 
+        if ($request->tags){
+            $post->tags()->sync($request->tags);
+        }
+
         $post->update($data);
 
         session()->flash('success', 'Post Updated!');

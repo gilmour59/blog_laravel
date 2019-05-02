@@ -61,7 +61,7 @@
                                         @endif                 
                                     @else
                                         @isset($post)
-                                            @if (in_array($tag->id, $post->tags->pluck('id')->toArray()))
+                                            @if ($post->hasTag($tag->id))
                                                 selected
                                             @endif  
                                         @endisset
