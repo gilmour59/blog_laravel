@@ -17,6 +17,9 @@ class CreatePostTagTable extends Migration
             $table->increments('id');
             $table->mediumInteger('post_id');
             $table->mediumInteger('tag_id');
+
+            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 
