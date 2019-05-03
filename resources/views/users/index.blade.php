@@ -9,7 +9,6 @@
             @if ($users->count() > 0)
                 <table class="table table-hover">
                     <thead>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>About</th>
@@ -18,19 +17,16 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>
-
-                                </td>
-                                <td>
+                                <td width="20%">
                                     {{ $user->name }}
                                 </td>
-                                <td>
+                                <td width="30%">
                                     {{ $user->email }}
                                 </td>
-                                <td>
+                                <td width="20%">
                                     {{ $user->about }}
                                 </td>
-                                <td>
+                                <td width="10%">
                                     @if (!$user->isAdmin())
                                         <form action="{{ route('users.make-admin', $user->id) }}" method="POST">
                                             @csrf
