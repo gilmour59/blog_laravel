@@ -27,7 +27,7 @@ class UserController extends Controller
 
         session()->flash('success', 'Profile Updated!');
 
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     public function makeAdmin(User $user){
@@ -41,7 +41,7 @@ class UserController extends Controller
             $user->save();
 
             session()->flash('success', $user->name . ' is now Admin!');
-    
+
             return redirect()->route('users.index');
         }
     }
