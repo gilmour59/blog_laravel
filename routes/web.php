@@ -35,5 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('users', 'UserController@index')->name('users.index');
     Route::put('users/{user}/make-admin', 'UserController@makeAdmin')->name('users.make-admin');
+    Route::get('users/profile', 'UserController@profile')->name('users.profile');
+    Route::put('users/profile', 'UserController@update')->name('users.update-profile');
 });
 
