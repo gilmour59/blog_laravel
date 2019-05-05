@@ -14,6 +14,7 @@
 Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Auth::routes();
+Route::resource('posts', 'PostController');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -23,7 +24,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('tags', 'TagController');
 
-    Route::resource('posts', 'PostController');
     Route::put('restore-posts/{post}', 'PostController@restore')->name('posts.restore');
     Route::get('trashed-posts', 'PostController@trashed')->name('posts.trash');
     Route::delete('trashed-posts/{post}', 'PostController@destroyTrash')->name('posts.destroy-trash');

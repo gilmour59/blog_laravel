@@ -13,6 +13,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth')->except('show');
         $this->middleware('verifyCategoriesCount')->only(['create', 'store']);
     }
 
@@ -72,7 +73,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show')->with('post', $post);
     }
 
     /**
