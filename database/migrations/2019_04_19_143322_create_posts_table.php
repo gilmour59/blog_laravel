@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('description')->nullable();
             $table->text('content');
             $table->string('image');
+            $table->smallInteger('user_id');
             $table->unsignedSmallInteger('category_id');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
