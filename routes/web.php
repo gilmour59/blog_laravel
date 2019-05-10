@@ -15,6 +15,8 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Auth::routes();
 Route::resource('posts', 'PostController');
+Route::get('posts/categories/{category}', 'PostController@categories')->name('posts.categories');
+Route::get('posts/tags/{tag}', 'PostController@tags')->name('posts.tags');
 
 Route::middleware(['auth'])->group(function () {
 

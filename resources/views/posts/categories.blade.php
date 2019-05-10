@@ -1,7 +1,7 @@
 @extends('layouts.post')
 
 @section('title')
-    All Posts
+    Category
 @endsection
 
 @section('header')
@@ -11,10 +11,7 @@
 
             <div class="row">
                 <div class="col-md-8 mx-auto">
-
-                    <h1>Latest Posts</h1>
-                    <p class="lead-2 opacity-90 mt-6">Read and get updated on how we progress</p>
-
+                    <h1>{{ $category->name }}</h1>
                 </div>
             </div>
 

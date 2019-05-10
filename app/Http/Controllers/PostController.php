@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except(['show', 'categories', 'tags']);
         $this->middleware('verifyCategoriesCount')->only(['create', 'store']);
     }
 
@@ -162,5 +162,21 @@ class PostController extends Controller
         session()->flash('success', 'Post successfully Restored!');
 
         return redirect()->back();
+    }
+
+    public function categories(Category $category){
+        return view('posts.categories')
+            ->with('category', $category)
+            ->with('posts', $category->posts()->search())
+            ->with('categories', Category::all())
+            ->with('tags', Tag::all());
+    }
+
+    public function tags(Tag $tag){
+        return view('posts.tags')
+            ->with('tag', $tag)
+            ->with('posts', $tag->posts()->search())
+            ->with('categories', Category::all())
+            ->with('tags', Tag::all());
     }
 }

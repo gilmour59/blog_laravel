@@ -11,7 +11,7 @@ class WelcomeController extends Controller
 {
     public function index(){
         return view('welcome')
-        ->with('posts', Post::all())
+        ->with('posts', Post::search())
         ->with('categories', Category::all())
         ->with('tags', Tag::all());
     }

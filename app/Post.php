@@ -31,4 +31,21 @@ class Post extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function scopeSearch($query){
+
+        $search = request()->query('search');
+
+        if($search) {
+            return $query->where('title', 'like', '%'. $search .'%')
+                ->orWhere('content', 'like', '%'. $search .'%')
+                ->simplePaginate(1);
+        }else{
+            return $query->simplePaginate(1);
+        }
+    }
+
+    public function scopePublish($query){
+        return $query;
+    }
 }
