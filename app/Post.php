@@ -12,6 +12,13 @@ class Post extends Model
 
     protected $fillable = ['title', 'description', 'content', 'image', 'published_at', 'category_id', 'user_id'];
 
+     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['published_at'];
+
     public function deleteImage(){
         Storage::delete($this->image);
     }
@@ -32,6 +39,12 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
+    //call publish() in query builder
+    public function scopePublish($query){
+        return $query->where('published_at', '<=', now());
+    }
+
+    //call search() in query builder
     public function scopeSearch($query){
 
         $search = request()->query('search');
@@ -39,13 +52,10 @@ class Post extends Model
         if($search) {
             return $query->where('title', 'like', '%'. $search .'%')
                 ->orWhere('content', 'like', '%'. $search .'%')
-                ->simplePaginate(1);
+                ->publish()
+                ->simplePaginate(10);
         }else{
-            return $query->simplePaginate(1);
+            return $query->publish()->simplePaginate(10);
         }
-    }
-
-    public function scopePublish($query){
-        return $query;
     }
 }

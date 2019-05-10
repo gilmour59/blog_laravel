@@ -95,7 +95,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr('#published_at',{
-            enableTime : true
+            enableTime : true,
+            enableSeconds : true
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/js/select2.min.js"></script>
