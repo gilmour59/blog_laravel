@@ -15,4 +15,20 @@ class WelcomeController extends Controller
         ->with('categories', Category::all())
         ->with('tags', Tag::all());
     }
+
+    public function categories(Category $category){
+        return view('welcome')
+            ->with('category', $category)
+            ->with('posts', $category->posts()->search())
+            ->with('categories', Category::all())
+            ->with('tags', Tag::all());
+    }
+
+    public function tags(Tag $tag){
+        return view('welcome')
+            ->with('tag', $tag)
+            ->with('posts', $tag->posts()->search())
+            ->with('categories', Category::all())
+            ->with('tags', Tag::all());
+    }
 }

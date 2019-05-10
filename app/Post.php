@@ -53,9 +53,12 @@ class Post extends Model
             return $query->where('title', 'like', '%'. $search .'%')
                 ->orWhere('content', 'like', '%'. $search .'%')
                 ->publish()
+                ->orderBy('published_at', 'desc')
                 ->simplePaginate(10);
         }else{
-            return $query->publish()->simplePaginate(10);
+            return $query->publish()
+                ->orderBy('published_at', 'desc')
+                ->simplePaginate(10);
         }
     }
 }
